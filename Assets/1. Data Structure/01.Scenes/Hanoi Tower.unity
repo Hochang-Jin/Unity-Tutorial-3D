@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f14ab6d33d8ed4a903126bcb735e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hanoiLevel: 3
+  hanoiLevel: 5
   donutPrefabs:
   - {fileID: 7327388082329510193, guid: d7550b3071e859b48a94e96bdac4de87, type: 3}
   - {fileID: 7859492342390340734, guid: 91463e19059d4bc4d96a3cb0788de83f, type: 3}
@@ -519,7 +519,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.22, y: 2.86, z: 2.36}
+  m_Size: {x: 9.22, y: 2.86, z: 9.81}
   m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940697}
 --- !u!1 &1033669554
 GameObject:
@@ -665,7 +665,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.22, y: 2.86, z: 2.36}
+  m_Size: {x: 9.22, y: 2.86, z: 9.81}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &1071008537
 GameObject:
@@ -948,7 +948,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.22, y: 2.86, z: 2.36}
+  m_Size: {x: 9.22, y: 2.86, z: 9.81}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

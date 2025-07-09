@@ -38,7 +38,6 @@ public class BoardBar : MonoBehaviour
                 return true;
             else
             {
-                Debug.Log($"현재 넣으려는 도넛은 {pushNumber}이고, 해당 기둥의 제일 위의 도넛은 {peekNumber}입니다.");
                 return false;
             }
         }
