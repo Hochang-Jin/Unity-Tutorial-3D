@@ -150,8 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScoreUI: {fileID: 1301183872}
   bestScoreUI: {fileID: 605008591}
-  currentScore: 0
-  bestScore: 0
 --- !u!4 &55469178
 Transform:
   m_ObjectHideFlags: 0
@@ -681,7 +679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 91, y: -213}
+  m_AnchoredPosition: {x: 154, y: -213}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &605008591
@@ -704,7 +702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCD5C\uACE0 \uC810\uC218 "
+  m_text: "\uCD5C\uACE0 \uC810\uC218 : 0 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96e99d8a65fa82946a2d321f75540a5d, type: 2}
   m_sharedMaterial: {fileID: 8668313694167131198, guid: 96e99d8a65fa82946a2d321f75540a5d, type: 2}
@@ -1071,7 +1069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 91, y: -73}
+  m_AnchoredPosition: {x: 139, y: -73}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1301183872
@@ -1094,7 +1092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD604\uC7AC \uC810\uC218 "
+  m_text: "\uD604\uC7AC \uC810\uC218 : 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96e99d8a65fa82946a2d321f75540a5d, type: 2}
   m_sharedMaterial: {fileID: 8668313694167131198, guid: 96e99d8a65fa82946a2d321f75540a5d, type: 2}
