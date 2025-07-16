@@ -12,12 +12,7 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         
-        transform.position = transform.position + new Vector3(h, 0, v);
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Debug.Log("Fire1");
-        }
-        
+        Vector3 dir = new Vector3(h, v, 0);
+        transform.position += dir * (Time.deltaTime * 3f);
     }
 }
