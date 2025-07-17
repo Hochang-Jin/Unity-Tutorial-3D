@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    private Vector3 dir;
+    public Vector3 dir;
     public float speed = 5;
     public GameObject explosionFactory;
     
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         // Destroy(other.gameObject);
         if(other.gameObject.name.Contains("Bullet"))
         {
-            PlayerFire.Instance.bulletObjectPool.Add(other.gameObject);
+            PlayerFire.Instance.bulletObjectPool.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
             // other.gameObject.SetActive(false);
         }
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        EnemyManager.Instance.enemyObjectPool.Add(gameObject);
+        EnemyManager.Instance.enemyObjectPool.Enqueue(gameObject);
         gameObject.SetActive(false);
     }
 }

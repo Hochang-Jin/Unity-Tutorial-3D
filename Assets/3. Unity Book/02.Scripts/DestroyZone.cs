@@ -7,12 +7,12 @@ public class DestroyZone : MonoBehaviour
     {
         if(other.gameObject.name.Contains("Bullet"))
         {
-            PlayerFire.Instance.bulletObjectPool.Add(other.gameObject);
+            PlayerFire.Instance.bulletObjectPool.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
         }
         else
         {
-            EnemyManager.Instance.enemyObjectPool.Add(other.gameObject);
+            EnemyManager.Instance.enemyObjectPool.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
         }
     }
