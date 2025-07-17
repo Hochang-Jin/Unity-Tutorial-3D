@@ -30,10 +30,13 @@ public class Enemy : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        GameObject smObject = GameObject.Find("ScoreManager");
-        ScoreManager sm =  smObject.GetComponent<ScoreManager>();
-        int score = sm.GetScore() + 1;
-        sm.SetScore(score);
+        // GameObject smObject = GameObject.Find("ScoreManager");
+        // ScoreManager sm =  smObject.GetComponent<ScoreManager>();
+        // int score = sm.GetScore() + 1;
+        // sm.SetScore(score);
+        
+        // 위의 4줄이 싱글턴 사용으로 한줄로 줄었음
+        ScoreManager.Instance.Score++;
         
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = transform.position;
