@@ -205,29 +205,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 126362832}
-  - component: {fileID: 126362831}
   m_Layer: 0
-  m_Name: EnemyManager (4)
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &126362831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126362830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  targetTime: 3
-  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!4 &126362832
 Transform:
   m_ObjectHideFlags: 0
@@ -790,6 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 619542590}
+  - component: {fileID: 619542591}
   m_Layer: 0
   m_Name: EM
   m_TagString: Untagged
@@ -817,6 +802,29 @@ Transform:
   - {fileID: 126362832}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &619542591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619542589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 10
+  enemyObjectPool: []
+  spawnPoints:
+  - {fileID: 1776916695}
+  - {fileID: 1941737341}
+  - {fileID: 1844953799}
+  - {fileID: 1443203355}
+  - {fileID: 126362832}
+  timer: 0
+  targetTime: 0
+  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!1001 &884477574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1411,29 +1419,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1443203355}
-  - component: {fileID: 1443203354}
   m_Layer: 0
-  m_Name: EnemyManager (3)
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1443203354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443203353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  targetTime: 3
-  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!4 &1443203355
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,7 +1581,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1680,29 +1672,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776916695}
-  - component: {fileID: 1776916694}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1776916694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776916693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  targetTime: 3
-  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!4 &1776916695
 Transform:
   m_ObjectHideFlags: 0
@@ -1821,29 +1797,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844953799}
-  - component: {fileID: 1844953798}
   m_Layer: 0
-  m_Name: EnemyManager (2)
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1844953798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844953797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  targetTime: 3
-  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!4 &1844953799
 Transform:
   m_ObjectHideFlags: 0
@@ -1868,29 +1828,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1941737341}
-  - component: {fileID: 1941737340}
   m_Layer: 0
-  m_Name: EnemyManager (1)
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1941737340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941737339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f411b443b1f3c434da77a71321853ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  targetTime: 3
-  enemyFactory: {fileID: 7881708682253311034, guid: 2b98eafc6c8dc3747848f421a9587994, type: 3}
 --- !u!4 &1941737341
 Transform:
   m_ObjectHideFlags: 0
@@ -1989,6 +1933,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletFactory: {fileID: 2163522439329229303, guid: 0cde9c49e93c8fb42ac1c6953ab0c6d2, type: 3}
   firePosition: {fileID: 72948105}
+  poolSize: 10
+  bulletObjectPool: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

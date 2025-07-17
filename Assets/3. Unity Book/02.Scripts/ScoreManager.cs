@@ -2,13 +2,10 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : Singleton<ScoreManager>
 {
     public TextMeshProUGUI currentScoreUI;
     public TextMeshProUGUI bestScoreUI;
-    
-    //Singleton
-    public static ScoreManager Instance{ get; private set; }
 
     public int Score
     {
@@ -32,14 +29,6 @@ public class ScoreManager : MonoBehaviour
     }
     private int currentScore;
     private int bestScore;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
 
     private void Start()
     {

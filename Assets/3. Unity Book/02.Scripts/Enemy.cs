@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public float speed = 5;
     public GameObject explosionFactory;
     
-    private void Start()
+    private void OnEnable()
     {
         int ranValue = Random.Range(0, 10);
         if (ranValue < 3)
@@ -41,7 +41,18 @@ public class Enemy : MonoBehaviour
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = transform.position;
         
-        Destroy(other.gameObject);
-        Destroy(gameObject);
+        // Destroy(other.gameObject);
+        if(other.gameObject.name.Contains("Bullet"))
+        {
+            PlayerFire.Instance.bulletObjectPool.Add(other.gameObject);
+            other.gameObject.SetActive(false);
+            // other.gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(other.gameObject);
+        }
+        EnemyManager.Instance.enemyObjectPool.Add(gameObject);
+        gameObject.SetActive(false);
     }
 }
