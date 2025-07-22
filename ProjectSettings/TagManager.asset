@@ -16,11 +16,11 @@ TagManager:
   - Player
   - Bullet
   - Enemy
+  - Bomb
   - 
   - 
   - 
-  - 
-  - 
+  - Obstacle
   - 
   - 
   - 
