@@ -1,48 +1,52 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridManager : Singleton<GridManager>
 {
     public GameObject[] obstacles;
-    public Node[,]  nodes { get; set; }
+    public Node[,] nodes { get; set; }
 
     public int numOfRows;
-    public int numOfCols;
+    public int numOfColumns;
     public float gridCellSize;
 
     private Vector3 origin = new Vector3();
-
     public Vector3 Origin
     {
         get { return origin; }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        CalculateObstacles();
     }
 
     private void CalculateObstacles()
     {
-        nodes = new Node[numOfRows, numOfCols];
+        nodes = new Node[numOfRows, numOfColumns];
+
         int index = 0;
-        for (int i = 0; i < numOfRows; i++)
+        for (int i = 0; i < numOfColumns; i++)
         {
-            for (int j = 0; j < numOfCols; j++)
+            for (int j = 0; j < numOfRows; j++)
             {
-                Vector3 cellPos = GetGridCellCenter(index++);
+                Vector3 cellPos = GetGridCellCenter(index);
                 Node node = new Node(cellPos);
                 nodes[i, j] = node;
+                index++;
             }
         }
 
         if (obstacles != null && obstacles.Length > 0)
         {
-            foreach (var obstacle in obstacles)
+            foreach (GameObject obstacle in obstacles)
             {
                 int indexCell = GetGridIndex(obstacle.transform.position);
-                GetRowCol(indexCell, out var row, out var col);
+                int row = GetRow(indexCell);
+                int col = GetColumn(indexCell);
                 nodes[row, col].MarkAsObstacle();
             }
         }
@@ -50,103 +54,115 @@ public class GridManager : MonoBehaviour
 
     public Vector3 GetGridCellCenter(int index)
     {
-        Vector3 cellPos = GetGridCellPosition(index);
-        cellPos.x += gridCellSize / 2f;
-        cellPos.y += gridCellSize / 2f;
-        return cellPos;
+        Vector3 cellPosition = GetGridCellPosition(index);
+        cellPosition.x += gridCellSize / 2f;
+        cellPosition.z += gridCellSize / 2f;
+
+        return cellPosition;
     }
 
     public Vector3 GetGridCellPosition(int index)
     {
-        GetRowCol(index, out var row, out var col);
-        
+        int row = GetRow(index);
+        int col = GetColumn(index);
         float xPosInGrid = col * gridCellSize;
         float zPosInGrid = row * gridCellSize;
-        
-        return Origin + new Vector3(xPosInGrid, 0.0f, zPosInGrid);
+
+        return Origin + new Vector3(xPosInGrid, 0, zPosInGrid);
     }
 
     public int GetGridIndex(Vector3 pos)
     {
         if (!isInBounds(pos))
             return -1;
+
         pos += Origin;
         int col = (int)(pos.x / gridCellSize);
         int row = (int)(pos.z / gridCellSize);
-        
-        return col * numOfCols + row;
+
+        return row * numOfColumns + col;
     }
 
     public bool isInBounds(Vector3 pos)
     {
-        float width = numOfCols * gridCellSize;
+        float width = numOfColumns * gridCellSize;
         float height = numOfRows * gridCellSize;
-        
+
         return pos.x >= Origin.x && pos.x <= Origin.x + width && pos.z >= Origin.z && pos.z <= Origin.z + height;
     }
 
-    public void GetRowCol(int index, out int row, out int col)
+    public int GetRow(int index)
     {
-        row = index / numOfCols;
-        col = index % numOfCols;
+        int row = index / numOfColumns;
+        return row;
+    }
+
+    public int GetColumn(int index)
+    {
+        int col = index % numOfColumns;
+        return col;
     }
 
     public void GetNeighbors(Node node, List<Node> neighbors)
     {
         int nodeIndex = GetGridIndex(node.pos);
-        GetRowCol(nodeIndex, out var row, out var col);
+        int row = GetRow(nodeIndex);
+        int col = GetColumn(nodeIndex);
         
-        // down
+        
+        // 아래
         int leftNodeRow = row - 1;
-        int leftNodeCol = col;
-        AssignNeighbor(leftNodeRow, leftNodeCol, neighbors);
-        // up
+        int leftNodeColumn = col;
+        AssignNeighbor(leftNodeRow, leftNodeColumn, neighbors);
+        
+        // 위
         leftNodeRow = row + 1;
-        leftNodeCol = col;
-        AssignNeighbor(leftNodeRow, leftNodeCol, neighbors);
-        // right
+        leftNodeColumn = col;
+        AssignNeighbor(leftNodeRow, leftNodeColumn, neighbors);
+        
+        // 오른쪽
         leftNodeRow = row;
-        leftNodeCol = col + 1;
-        AssignNeighbor(leftNodeRow, leftNodeCol, neighbors);
-        // left
+        leftNodeColumn = col + 1;
+        AssignNeighbor(leftNodeRow, leftNodeColumn, neighbors);
+        
+        // 왼쪽
         leftNodeRow = row;
-        leftNodeCol = col - 1;
-        AssignNeighbor(leftNodeRow, leftNodeCol, neighbors);
+        leftNodeColumn = col - 1;
+        AssignNeighbor(leftNodeRow, leftNodeColumn, neighbors);
     }
 
     private void AssignNeighbor(int row, int col, List<Node> neighbors)
     {
-        if (row != -1 && col != -1 && row < numOfRows && col < numOfCols)
+        if (row != -1 && col != -1 && row < numOfRows && col < numOfColumns)
         {
             Node nodeToAdd = nodes[row, col];
-            if(!nodeToAdd.isObstacle)
+            if (!nodeToAdd.isObstacle)
                 neighbors.Add(nodeToAdd);
         }
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        DebugDrawGrid(transform.position, numOfRows, numOfCols, gridCellSize, Color.blue);
+        DebugDrawGrid(transform.position, numOfRows, numOfColumns, gridCellSize, Color.blue);
     }
-
-    public void DebugDrawGrid(Vector3 origin, int numOfRows, int numOfCols, float cellSize, Color color)
+    
+    public void DebugDrawGrid(Vector3 origin, int numRows, int numCols, float cellSize, Color color)
     {
-        float width = numOfCols * gridCellSize;
-        float height = numOfRows * gridCellSize;
+        float width = numCols * cellSize;
+        float height = numRows * cellSize;
 
-        for (int i = 0; i < numOfRows; i++)
+        for (int i = 0; i < numRows; i++)
         {
-            Vector3 startPos = origin + i * cellSize * Vector3.forward;
-            Vector3 endPos = startPos + width * Vector3.right;
+            Vector3 startPos = origin + i * cellSize * new Vector3(0, 0, 1);
+            Vector3 endPos = startPos + width * new Vector3(1, 0, 0);
             Debug.DrawLine(startPos, endPos, color);
         }
 
-        for (int i = 0; i < numOfCols; i++)
+        for (int i = 0; i < numCols; i++)
         {
-            Vector3 startPos = origin + i * cellSize * Vector3.right;
-            Vector3 endPos = startPos + height * Vector3.forward;
+            Vector3 startPos = origin + i * cellSize * new Vector3(1, 0, 0);
+            Vector3 endPos = startPos + height * new Vector3(0, 0, 1);
             Debug.DrawLine(startPos, endPos, color);
         }
-        
     }
 }

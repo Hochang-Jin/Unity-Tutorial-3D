@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PriorityQueue : MonoBehaviour
+public class PriorityQueue
 {
     private List<Node> nodes = new List<Node>();
 
