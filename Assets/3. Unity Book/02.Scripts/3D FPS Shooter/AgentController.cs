@@ -1,28 +1,28 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    public Transform player;
     private NavMeshAgent agent;
-
     public Transform[] points;
-    public int index;
+    private int index;
 
-    private void Start()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(points[index].position);
     }
 
-    private void Update()
+    void Update()
     {
-        agent.SetDestination(points[index].position);
-        if (agent.remainingDistance <= 1.5f) // 목적지와의 거리가 1.5 이하일 경우
+        if (Vector3.Distance(transform.position, points[index].position) < 1.5f)
         {
-            Debug.Log($"{index++}");
-            if(index >= points.Length)
+            index++;
+            if (index >= points.Length) 
                 index = 0;
+            
+            agent.SetDestination(points[index].position);
+            
         }
     }
 }
