@@ -10,6 +10,13 @@ public class FPSPlayerFire : MonoBehaviour
     private WeaponMode wMode;
     public TextMeshProUGUI wModeText;
     public GameObject[] eff_Flash;
+
+    public GameObject weapon1;
+    public GameObject weapon2;
+    public GameObject crosshair1;
+    public GameObject crosshair2;
+    public GameObject itemImg1;
+    public GameObject itemImg2;
     
     
     public GameObject firePosition;
@@ -91,12 +98,26 @@ public class FPSPlayerFire : MonoBehaviour
             zoomMode = false;
             Camera.main.fieldOfView = 60f;
             wModeText.text = "NORMAL MODE";
+            
+            weapon1.SetActive(true);
+            weapon2.SetActive(false);
+            crosshair1.SetActive(true);
+            crosshair2.SetActive(false);
+            itemImg1.SetActive(true);
+            itemImg2.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             wMode = WeaponMode.SNIPER;
             wModeText.text = "SNIPER MODE";
+            
+            weapon1.SetActive(false);
+            weapon2.SetActive(true);
+            crosshair1.SetActive(false);
+            crosshair2.SetActive(true);
+            itemImg1.SetActive(false);
+            itemImg2.SetActive(true);
         }
     }
 

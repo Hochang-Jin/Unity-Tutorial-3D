@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FPSGameManager : Singleton<FPSGameManager>
 {
-    public enum GameState{READY, RUN, GAMEOVER}
+    public enum GameState{READY, RUN, PAUSE, GAMEOVER}
 
+    public GameObject gameOption;
+    
     public GameState gState = GameState.READY;
     public GameObject gameLabel;
     private TextMeshProUGUI gameText;
@@ -33,6 +36,8 @@ public class FPSGameManager : Singleton<FPSGameManager>
             gameText.text = "Game Over";
             gameText.color = new Color32(255, 0, 0, 255);
             gState = GameState.GAMEOVER;
+
+            Transform buttons = gameText.transform.GetChild(0);
         }
     }
 
@@ -43,5 +48,31 @@ public class FPSGameManager : Singleton<FPSGameManager>
         yield return new WaitForSeconds(0.5f);
         gameLabel.SetActive(false);
         gState = GameState.RUN;
+    }
+
+    public void OpenOptionWindow()
+    {
+        gameOption.SetActive(true);
+        Time.timeScale = 0;
+        gState = GameState.PAUSE;
+        
+    }
+
+    public void CloseOptionWindow()
+    {
+        gameOption.SetActive(false);
+        Time.timeScale = 1;
+        gState = GameState.RUN;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
