@@ -74,7 +74,7 @@ public class FPSPlayerFire : MonoBehaviour
                     bomb.transform.position = firePosition.transform.position;
 
                     Rigidbody rb = bomb.GetComponent<Rigidbody>();
-                    rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
+                    rb.AddForce((Camera.main.transform.forward + Camera.main.transform.up * 0.5f) * throwPower, ForceMode.Impulse);
                     break;
                 case WeaponMode.SNIPER: // 스나이퍼 모드 일 때 줌
                     Camera.main.fieldOfView = zoomMode ? 60f : 15f;
