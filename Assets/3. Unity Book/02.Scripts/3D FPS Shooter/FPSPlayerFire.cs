@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class FPSPlayerFire : MonoBehaviour
 {
+    #region Variables
     private enum WeaponMode{ NORMAL, SNIPER}
     private WeaponMode wMode;
     public TextMeshProUGUI wModeText;
@@ -15,6 +16,7 @@ public class FPSPlayerFire : MonoBehaviour
     public GameObject weapon2;
     public GameObject crosshair1;
     public GameObject crosshair2;
+    public GameObject crosshair2_zoom;
     public GameObject itemImg1;
     public GameObject itemImg2;
     
@@ -31,7 +33,7 @@ public class FPSPlayerFire : MonoBehaviour
     private ParticleSystem ps;
     
     private bool zoomMode = false;
-
+    #endregion
     void Start()
     {
         ps = bulletEffect.GetComponent<ParticleSystem>();
@@ -44,6 +46,8 @@ public class FPSPlayerFire : MonoBehaviour
     {
         if (FPSGameManager.Instance.gState != FPSGameManager.GameState.RUN)
             return;
+
+        #region MouseLeftClick -> Fire
         if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
         {
             if (anim.GetFloat("MoveMotion") == 0)
@@ -71,6 +75,9 @@ public class FPSPlayerFire : MonoBehaviour
                 }  
             }
         }
+        #endregion
+
+        #region MouseRightClick -> Granade or Zoom
         
         if (Input.GetMouseButtonDown(1)) // 마우스 오른쪽 버튼 클릭
         {
@@ -84,14 +91,29 @@ public class FPSPlayerFire : MonoBehaviour
                     rb.AddForce((Camera.main.transform.forward + Camera.main.transform.up * 0.5f) * throwPower, ForceMode.Impulse);
                     break;
                 case WeaponMode.SNIPER: // 스나이퍼 모드 일 때 줌
-                    Camera.main.fieldOfView = zoomMode ? 60f : 15f;
                     zoomMode = !zoomMode;
+
+                    if (zoomMode)
+                    {
+                        crosshair2_zoom.SetActive(true);
+                        crosshair2.SetActive(false);
+                        Camera.main.fieldOfView = 15f;
+                    }
+                    else
+                    {
+                        crosshair2_zoom.SetActive(false);
+                        crosshair2.SetActive(true);
+                        Camera.main.fieldOfView = 60f;
+                    }
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+        #endregion
 
+        #region Change Weapon
         if (Input.GetKeyDown(KeyCode.Alpha1)) // 1번 키를 누르면
         {
             wMode = WeaponMode.NORMAL;
@@ -118,7 +140,9 @@ public class FPSPlayerFire : MonoBehaviour
             crosshair2.SetActive(true);
             itemImg1.SetActive(false);
             itemImg2.SetActive(true);
-        }
+        }       
+        #endregion
+
     }
 
     IEnumerator ShootEffectOn(float duration)
