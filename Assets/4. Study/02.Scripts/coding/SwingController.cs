@@ -54,7 +54,3 @@ public class SwingController : MonoBehaviour
         Debug.Log("스윙 종료");
     }
 }
-
-public class GameManager
-{
-}
