@@ -20,6 +20,7 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.SetCameraState(GameManager.CameraState.OUTSIDE);
+            GameManager.Instance.field.fieldState = FieldManager.FieldState.None;
             GameManager.Instance.ui.ActivateFieldUI(false);
         }
     }

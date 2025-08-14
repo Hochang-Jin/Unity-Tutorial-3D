@@ -15,7 +15,8 @@ namespace Farm
             OUTSIDE,
             FIELD,
             HOUSE,
-            ANIMAL
+            ANIMAL,
+            BOARD
         }
         public CameraState _cameraState = CameraState.OUTSIDE;
         

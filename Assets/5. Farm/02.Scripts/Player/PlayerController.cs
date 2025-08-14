@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -21,10 +22,19 @@ namespace Farm
         private float currentSpeed;
         private bool isRun;
 
+        private void Awake()
+        {
+            int characterIndex = LoadSceneManager.Instance.characterIndex;
+            transform.GetChild(characterIndex).gameObject.SetActive(true);
+            
+            anim = transform.GetChild(characterIndex).GetComponent<Animator>();
+            cc = GetComponent<CharacterController>();
+            
+        }
+
         void Start()
         {
-            anim = GetComponent<Animator>();
-            cc = GetComponent<CharacterController>();
+            
         }
 
         void Update()
